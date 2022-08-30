@@ -5,8 +5,6 @@ const cors = require('cors');
 require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
-// DB_USER=famous-footwear
-// DB_PASS=famous-footwear
 
 // app.use(cors({ origin: "https://cycle-parts-hut.web.app" }))
 app.use(cors())
