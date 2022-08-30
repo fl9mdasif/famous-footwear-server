@@ -22,7 +22,7 @@ async function run() {
         const shoesCollection = client.db('famous-footwear').collection('shoes');
         const userAddedCollection = client.db('famous-footwear').collection('userItems');
         // const completedTaskCollection = client.db('to_do_app').collection('completed_task');
-        // console.log(shoesCollection);
+
 
 
         // get all products 
@@ -119,8 +119,6 @@ async function run() {
             res.send(result);
         });
 
-
-
     }
     finally {
 
@@ -133,5 +131,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`listening to Famous footwear ${port}`)
+    console.log(`listening to Famous footwear Feetz ${port}`)
 })
