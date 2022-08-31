@@ -6,7 +6,7 @@ require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
-// app.use(cors({ origin: "https://cycle-parts-hut.web.app" }))
+app.use(cors({ origin: "https://famous-footwear-warehouse.web.app" }))
 app.use(cors())
 app.use(express.json())
 
@@ -151,7 +151,7 @@ async function run() {
                     viewers: data.viewers
                 }
             }
-            console.log(updateDoc)
+            // console.log(updateDoc)
             const options = { upsert: true };
             const result = await blogCollection.updateOne(filter, updateDoc, options);
             res.send(result);
