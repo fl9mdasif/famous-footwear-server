@@ -21,6 +21,7 @@ async function run() {
         console.log('database connected');
         const shoesCollection = client.db('famous-footwear').collection('shoes');
         const userAddedCollection = client.db('famous-footwear').collection('userItems');
+        const blogCollection = client.db('famous-footwear').collection('blogs');
         // const completedTaskCollection = client.db('to_do_app').collection('completed_task');
 
 
@@ -116,6 +117,43 @@ async function run() {
             };
             const options = { upsert: true };
             const result = await shoesCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        });
+
+        //blog
+        app.get('/blogs', async (req, res) => {
+            const query = {};
+            const cursor = blogCollection.find(query);
+            const blog = await cursor.toArray();
+            res.send(blog);
+
+        });
+        // get single blog details 
+        app.get('/blogs/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const singleProduct = await blogCollection.findOne(query);
+            res.send(singleProduct);
+        });
+
+        // update blog viewers
+        app.put("/blogs/:id", async (req, res) => {
+            const data = req.body;
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) };
+            const updateDoc = {
+                $set:
+                {
+                    reaction: data.reaction,
+                    category: data.category,
+                    blog_title: data.blog_title,
+                    blog_description: data.blog_description,
+                    viewers: data.viewers
+                }
+            }
+            console.log(updateDoc)
+            const options = { upsert: true };
+            const result = await blogCollection.updateOne(filter, updateDoc, options);
             res.send(result);
         });
 
